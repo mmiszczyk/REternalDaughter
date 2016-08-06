@@ -22,7 +22,11 @@
 
 ;TODO: windowed mode, fix upscaling, maybe also upscale by stretching
 
-(import bsdiff4 subprocess os argparse)
+(import bsdiff4 subprocess os argparse shutil)
+
+(defn replace-with-patch [gamepath patchpath]
+  (shutil.copy2 gamepath (+ gamepath ".bak"))
+  (bsdiff4.file_patch_inplace gamepath patchpath))
 
 (defn start-custom-game [gamepath patchpath]
   (bsdiff4.file_patch gamepath "temp.exe" patchpath)
@@ -56,6 +60,8 @@ ______    /                          /)
                       :help "Upscale the game instead of just forcing higher resolution (experimental)")
 (.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u)")
 (.add_argument parser "-n" "--nofix" :action "store_true" :help "Don't fix the game, just run it (overrides -u and -p)")
+(.add_argument parser "-r" "--replace" :action "store_true"
+                      :help "Permanently replace input file with a patched version (overrides -n)")
 (setv arguments (.parse_args parser))
 
 (if arguments.upscale   (setv patchfile "patch1")             ; increase resolution and upscale
@@ -65,4 +71,6 @@ ______    /                          /)
 (if arguments.input (setv gamefile arguments.input)         ; custom gamefile
                     (setv gamefile "Eternal Daughter.exe")) ; default
 (greet)
-(if arguments.nofix (subprocess.call gamefile) (start-custom-game gamefile patchfile))
+(if arguments.replace (replace-with-patch gamefile patchfile)                      ; replace with patch
+                      (if arguments.nofix (subprocess.call gamefile)               ; just run
+                                          (start-custom-game gamefile patchfile))) ; temporary patch (default)

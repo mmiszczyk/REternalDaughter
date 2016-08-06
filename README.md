@@ -32,19 +32,21 @@ To use REternal Daughter, copy its files to your Eternal Daughter
 directory and run reternal.py. If you don't have the game, it can be
 freely downloaded from [here](http://www.derekyu.com/games.html).
 
-    usage: reternal.py [-h] [-i INPUT] [-u] [-p PATCHFILE] [-n]
+    usage: reternal.py [-h] [-i INPUT] [-u] [-p PATCHFILE] [-n] [-r]
     
     Unofficial Eternal Daughter resolution fix
     
     optional arguments:
       -h, --help            show this help message and exit
       -i INPUT, --input INPUT
-                        Input file (default: "Eternal Daughter.exe")
+                            Input file (default: "Eternal Daughter.exe")
       -u, --upscale         Upscale the game instead of just forcing higher
-                        resolution (experimental)
+                            resolution (experimental)
       -p PATCHFILE, --patchfile PATCHFILE
-                        Custom patchfile in BSDiff format (overrides -u)
+                            Custom patchfile in BSDiff format (overrides -u)
       -n, --nofix           Don't fix the game, just run it (overrides -u and -p)
+      -r, --replace         Permanently replace input file with a patched version
+                            (overrides -n)
       
 Reversing Eternal Daughter
 --------------------------
