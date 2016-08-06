@@ -105,7 +105,16 @@ annoying than the previous version.
 I then turn my fixes into a Python/Hy (Python because rapid prototyping,
 Hy because I like Lisp-like syntax) program. There's a lot more that can
 be done but I think it's a decent start.
-![Everything seems fine](images/savefile.png)
+
+Reversing save files
+--------------------
+Eternal Daughter uses slotX.sav for holding saved games, where X is
+a number between 1 and 3. They store binary data and opening them with
+a hex editor gives us a hint about what to do next: the first 8 bytes
+contain a magic number which is a representation of ASCII string
+'CNCARRAY'.
+
+![Savefile in hex editor](images/savefile.png)
 
 'CNC Array' is the format used by Multimedia Fusion to store
 the engine's array objects. According to a post by Dines, user of
@@ -150,13 +159,6 @@ file, its settings variable (001A) stores the value of 5. In binary,
 a DWORD representing 5 is 29 0s followed by 101. Therefore, each save
 is a 1-indexed array of 32-bit integers.
 
-Reversing save files
---------------------
-Eternal Daughter uses slotX.sav for holding saved games, where X is
-a number between 1 and 3. They store binary data and opening them with
-a hex editor gives us a hint about what to do next: the first 8 bytes
-contain a magic number which is a representation of ASCII string
-'CNCARRAY'.
 
 TODO
 ----
