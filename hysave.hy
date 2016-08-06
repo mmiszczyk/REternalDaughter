@@ -72,6 +72,6 @@
 (.add_argument parser "-S" "--sigil" :help "Enable/disable Sigil" :type int :choices [0 1])
 (.add_argument parser "-W" "--weapon" :help "Current weapon" :type str
                                       :choices ["knife" "hammer" "mojak" "ozar" "sigil"])
-(.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Erlanduru, 5 - adult Erlanduru with mask)"
+(.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Elanduru, 5 - adult Elanduru with mask)"
                                         :type int :choices (range 0 6))
 (setv arguments (.parse_args parser))
