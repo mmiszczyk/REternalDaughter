@@ -51,7 +51,7 @@ freely downloaded from [here](http://www.derekyu.com/games.html).
 Reversing Eternal Daughter
 --------------------------
 Eternal Daughter was created with an old version of Multimedia Fusion,
-a game engine relatively popular among indie development for its
+a game engine relatively popular among indie developers for its
 user-friendly 'no programming' approach.
 ![Eternal Daughter.exe info](images/exeinfo.png)
 Game logic seems to reside completely inside Eternal Daughter.exe.
@@ -86,7 +86,8 @@ resolution and it looks good. Unfortunately, there are problems here and
 there. The minor one is that triggers in cutscenes are visible. The
 bigger one is that if you come from a bigger level to a smaller one,
 those larger portions are not redrawn and it looks stupid. You can
-enable this option with -u command line switch but it's not the default.
+enable this option with -u command line switch in reternal.py but it's
+not the default.
 ![Everything seems fine](images/hi-res.png)
 ![But it doesn't work the way it should](images/hi-res-glitch.png)
 

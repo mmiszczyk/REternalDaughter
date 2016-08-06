@@ -21,9 +21,9 @@
 ; see this description of CNC Array format: http://community.clickteam.com/threads/41217-specs-for-CNC-ARRAY-format
 ; offset 0x1e: health
 ; offset 0x22: setting to 1 enables double jump, I don't think it does anything else
-; offset 0x26: ?
-; offset 0x2a: ?
-; offset 0x2e: ?
+; offset 0x26: ? unknown offsets might be storyline triggers
+; offset 0x2a: ? '?' means tested but unkown
+; offset 0x2e: ? if something's not there, it wasn't rested
 ; offset 0x32: ?
 ; offset 0x36: ?
 ; offest 0x3a: number of gems (ammo for secondary weapon)
