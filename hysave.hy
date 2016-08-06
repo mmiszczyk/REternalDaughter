@@ -17,6 +17,7 @@
 (import argparse)
 
 ; TODO: actual logic, not just cmdline handling
+; TODO: find variables for gifts from gods and other special abilities in savefile
 ; see this description of CNC Array format: http://community.clickteam.com/threads/41217-specs-for-CNC-ARRAY-format
 ; offset 0x1e: health
 ; offset 0x22: setting to 1 enables double jump, I don't think it does anything else
@@ -56,7 +57,7 @@
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser
   :description "Eternal Daughter save reader/editor. Part of the REternal Daughter project"))
-(.add_argument parser "slot" :help "Save slot number" :type int)
+(.add_argument parser "slot-numer" :help "Save slot number" :type int)
 (.add_argument parser "-p" "--print" :action "store_true" :help "Print information about current savefile")
 (.add_argument parser "-l" "--life" :help "Set life to provided value" :type int)
 (.add_argument parser "-g" "--gems" :help "Set current number of gems (ammo)" :type int)
