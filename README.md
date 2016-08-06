@@ -172,7 +172,7 @@ variables in savefile:
 |0x5e  |Mojak               |True/false                                            |
 |0x72  |Current weapon      |1 - knife, 2 - hammer, 3 - Mojak, 4 - Ozar, 5 - Sigil |
 |0x76  |Ozar's Flame        |True/false                                            |
-|0x7a  |Elanduru save i con |True/false                                            |
+|0x7a  |Elanduru save icon  |True/false                                            |
 |0x8e  |Elanduru's form     |0 - none, 1 -3 - young, 4 - adult, 5 - adult with mask|
 |0x96  |Sigil               |True/false                                            |
 |0xaa  |Attack power        |-                                                     |
