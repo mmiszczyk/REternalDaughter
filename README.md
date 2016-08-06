@@ -26,8 +26,8 @@ for modern GPUs. It also has problems with its MIDI playback functions
 as if a music track changes while a sound effect is playing, the sound
 effect will loop endlessly and the game will become unplayably slow.
 
-Usage
------
+Usage: reternal.py
+------------------
 To use REternal Daughter, copy its files to your Eternal Daughter
 directory and run reternal.py. If you don't have the game, it can be
 freely downloaded from [here](http://www.derekyu.com/games.html).
@@ -105,6 +105,58 @@ annoying than the previous version.
 I then turn my fixes into a Python/Hy (Python because rapid prototyping,
 Hy because I like Lisp-like syntax) program. There's a lot more that can
 be done but I think it's a decent start.
+![Everything seems fine](images/savefile.png)
+
+'CNC Array' is the format used by Multimedia Fusion to store
+the engine's array objects. According to a post by Dines, user of
+Clickteam forums, the format works as follows:
+
+    offset  type    details
+    -----------------------
+      - HEADER CHUNK -
+    0000    ascii   "CNC ARRAY"
+    0009    byte    Null
+    000A    dword   Always '2' for some reason. Maybe version number?
+    000E    dword   X dimension size
+    0012    dword   Y dimension size
+    0016    dword   Z dimension size
+    001A    dword   Settings (see note 1)
+    001E    (Data chunks follow from here)
+    
+      - DATA CHUNK (number array) -
+    0000    dword   value of this item in the array.
+    
+    This repeats for every element in the array, until it reaches
+    the end of the file. There is one dword per element.
+    
+      - DATA CHUNK (text array) -
+    0000    dword   Length of text
+    0004    ascii   Stored text
+    
+      - Note 1 (Flags/Settings) -
+    This shows the meaning of the various bits in the flag byte:
+    
+    -------- -------- -------- ----gbtn
+    g = Global Array (1 = yes)
+    b = 1-Based Array (1 = yes)
+    t = Text Array (1 = yes)
+    n = Number Array (1 = yes)
+    - = Bit is not used.
+
+Do note that in hex editor, byte 000A stores the value '1' while the
+post claims it's always '2'. This seems to confirm the poster's theory
+that this is a version information variable. Looking further into the
+file, its settings variable (001A) stores the value of 5. In binary,
+a DWORD representing 5 is 29 0s followed by 101. Therefore, each save
+is a 1-indexed array of 32-bit integers.
+
+Reversing save files
+--------------------
+Eternal Daughter uses slotX.sav for holding saved games, where X is
+a number between 1 and 3. They store binary data and opening them with
+a hex editor gives us a hint about what to do next: the first 8 bytes
+contain a magic number which is a representation of ASCII string
+'CNCARRAY'.
 
 TODO
 ----
