@@ -159,6 +159,24 @@ file, its settings variable (001A) stores the value of 5. In binary,
 a DWORD representing 5 is 29 0s followed by 101. Therefore, each save
 is a 1-indexed array of 32-bit integers.
 
+Through trial and error, I discovered the meanings behind some of the
+variables in savefile:
+
+|Offset |Variable           |Comments                                              |
+|:-----:|:-----------------:|------------------------------------------------------|
+|0x1e  |Health              |-                                                     |
+|0x22  |Double jump         |True/false                                            |
+|0x3a  |Current gems (ammo) |Can be larger than max                                |
+|0x42  |Hammer              |True/false                                            |
+|0x56  |Max gems            |Can be lower than current                             |
+|0x5e  |Mojak               |True/false                                            |
+|0x72  |Current weapon      |1 - knife, 2 - hammer, 3 - Mojak, 4 - Ozar, 5 - Sigil |
+|0x76  |Ozar's Flame        |True/false                                            |
+|0x7a  |Erlanduru save icon |True/false                                            |
+|0x8e  |Erlanduru's form    |0 - none, 1 -3 - young, 4 - adult, 5 - adult with mask|
+|0x96  |Sigil               |True/false                                            |
+|0xaa  |Attack power        |-                                                     |
+|0x5c  |Current location    |-                                                     |
 
 TODO
 ----
