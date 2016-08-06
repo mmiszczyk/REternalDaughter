@@ -48,7 +48,7 @@
 ; offest 0x82: ?
 ; offest 0x86: ?
 ; offest 0x8a: ?
-; offest 0x8e: erlanduru: 0 - no, 1-3 - young, 4 - adult, 5 - adult with mask
+; offest 0x8e: elanduru: 0 - no, 1-3 - young, 4 - adult, 5 - adult with mask
 ; offest 0x92: ?
 ; offest 0x96: setting to 1 enables sigil
 ; offest 0xaa: attack power
@@ -71,6 +71,6 @@
 (.add_argument parser "-S" "--sigil" :help "Enable/disable Sigil" :type int :choices [0 1])
 (.add_argument parser "-W" "--weapon" :help "Current weapon" :type str
                                       :choices ["knife" "hammer" "mojak" "ozar" "sigil"])
-(.add_argument parser "-e" "--erlanduru" :help "Pick Erlanduru's form (0 - no Erlanduru, 5 - adult Erlanduru with mask)"
+(.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Erlanduru, 5 - adult Erlanduru with mask)"
                                          :type int :choices (range 0 6))
 (setv arguments (.parse_args parser))

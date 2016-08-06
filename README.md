@@ -112,7 +112,7 @@ Eternal Daughter uses slotX.sav for holding saved games, where X is
 a number between 1 and 3. They store binary data and opening them with
 a hex editor gives us a hint about what to do next: the first 8 bytes
 contain a magic number which is a representation of ASCII string
-'CNCARRAY'.
+'CNC ARRAY'.
 
 ![Savefile in hex editor](images/savefile.png)
 
@@ -173,7 +173,7 @@ variables in savefile:
 |0x72  |Current weapon      |1 - knife, 2 - hammer, 3 - Mojak, 4 - Ozar, 5 - Sigil |
 |0x76  |Ozar's Flame        |True/false                                            |
 |0x7a  |Erlanduru save icon |True/false                                            |
-|0x8e  |Erlanduru's form    |0 - none, 1 -3 - young, 4 - adult, 5 - adult with mask|
+|0x8e  |Elanduru's form     |0 - none, 1 -3 - young, 4 - adult, 5 - adult with mask|
 |0x96  |Sigil               |True/false                                            |
 |0xaa  |Attack power        |-                                                     |
 |0xc6  |Current location    |-                                                     |
