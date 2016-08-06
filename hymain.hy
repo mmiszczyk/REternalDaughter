@@ -54,7 +54,7 @@ ______    /                          /)
 
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser
-  :description "Unofficial Eternal Daughter resolution fix"))
+  :description "Unofficial Eternal Daughter resolution fix. Default settings work if placed in the game's folder."))
 (.add_argument parser "-i" "--input" :help "Input file (default: \"Eternal Daughter.exe\")")
 (.add_argument parser "-u" "--upscale" :action "store_true"
                       :help "Upscale the game instead of just forcing higher resolution (experimental)")

@@ -56,8 +56,9 @@
 
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser
-  :description "Eternal Daughter save reader/editor. Part of the REternal Daughter project"))
-(.add_argument parser "slot-numer" :help "Save slot number" :type int)
+  :description "Eternal Daughter save reader/editor. Part of the REternal Daughter project.
+  To use, place in the game's folder or any other folder containing ED savefiles with slot{1-3}.sav."))
+(.add_argument parser "slot-number" :help "Save slot number" :type int :choices (range 1 4))
 (.add_argument parser "-p" "--print" :action "store_true" :help "Print information about current savefile")
 (.add_argument parser "-l" "--life" :help "Set life to provided value" :type int)
 (.add_argument parser "-g" "--gems" :help "Set current number of gems (ammo)" :type int)
@@ -72,5 +73,5 @@
 (.add_argument parser "-W" "--weapon" :help "Current weapon" :type str
                                       :choices ["knife" "hammer" "mojak" "ozar" "sigil"])
 (.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Erlanduru, 5 - adult Erlanduru with mask)"
-                                         :type int :choices (range 0 6))
+                                        :type int :choices (range 0 6))
 (setv arguments (.parse_args parser))
