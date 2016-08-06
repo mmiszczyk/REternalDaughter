@@ -1,0 +1,15 @@
+#project stuff:
+/.idea/
+
+#game files
+/about.txt
+/Cncs232.dll
+/Eternal Daughter.exe
+/fonts.txt
+/intro.dat
+/windowed.txt
+
+#modified binaries
+/fixres1.exe
+/fixres2.exe
+
