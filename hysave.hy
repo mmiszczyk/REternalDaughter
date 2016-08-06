@@ -52,7 +52,7 @@
 ; offest 0x92: ?
 ; offest 0x96: setting to 1 enables sigil
 ; offest 0xaa: attack power
-; offest 0xc5: current position
+; offest 0xc6: current position
 
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser

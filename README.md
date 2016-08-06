@@ -176,7 +176,7 @@ variables in savefile:
 |0x8e  |Erlanduru's form    |0 - none, 1 -3 - young, 4 - adult, 5 - adult with mask|
 |0x96  |Sigil               |True/false                                            |
 |0xaa  |Attack power        |-                                                     |
-|0x5c  |Current location    |-                                                     |
+|0xc6  |Current location    |-                                                     |
 
 TODO
 ----
