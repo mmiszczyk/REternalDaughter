@@ -48,6 +48,48 @@ freely downloaded from [here](http://www.derekyu.com/games.html).
       -r, --replace         Permanently replace input file with a patched version
                             (overrides -n)
       
+Usage: saveutil.py
+------------------
+    usage: saveutil.py [-h] [-p] [-l LIFE] [-g GEMS] [-G GEMS_MAX] [-L LOCATION]
+                       [-a ATTACK_POWER] [-d {0,1}] [-e {0,1,2,3,4,5}] [-H {0,1}]
+                       [-M {0,1}] [-O {0,1}] [-S {0,1}]
+                       [-W {knife,hammer,mojak,ozar,sigil}]
+                       {1,2,3}
+    
+    Eternal Daughter save reader/editor. Part of the REternal Daughter project. To
+    use, place in the game's folder or any other folder containing ED savefiles
+    with slot{1-3}.sav.
+    
+    positional arguments:
+      {1,2,3}               Save slot number
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -p, --print           Print information about current savefile
+      -l LIFE, --life LIFE  Set life to provided value
+      -g GEMS, --gems GEMS  Set current number of gems (ammo)
+      -G GEMS_MAX, --gems-max GEMS_MAX
+                            Set maximum number of gems
+      -L LOCATION, --location LOCATION
+                            Teleport to chosen savespot
+      -a ATTACK_POWER, --attack-power ATTACK_POWER
+                            Set attack power
+      -d {0,1}, --doublejump {0,1}
+                            Enable/disable double jump
+      -e {0,1,2,3,4,5}, --elanduru {0,1,2,3,4,5}
+                            Pick Elanduru's form (0 - no Elanduru, 5 - adult
+                            Elanduru with mask)
+      -H {0,1}, --hammer {0,1}
+                            Enable/disable hammer
+      -M {0,1}, --mojak {0,1}
+                            Enable/disable Mojak
+      -O {0,1}, --ozar {0,1}
+                            Enable/disable Ozar's Flame
+      -S {0,1}, --sigil {0,1}
+                            Enable/disable Sigil
+      -W {knife,hammer,mojak,ozar,sigil}, --weapon {knife,hammer,mojak,ozar,sigil}
+                            Current weapon
+
 Reversing Eternal Daughter
 --------------------------
 Eternal Daughter was created with an old version of Multimedia Fusion,
@@ -178,6 +220,8 @@ variables in savefile:
 |0x96  |Sigil               |True/false                                            |
 |0xaa  |Attack power        |-                                                     |
 |0xc6  |Current location    |-                                                     |
+
+I use that knowledge to write a save editor/analyzer.
 
 TODO
 ----

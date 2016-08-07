@@ -14,11 +14,21 @@
 ;    further details)    ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(import argparse)
+(import argparse struct)
 
 (defreader | [str] `(getattr arguments ~str)) ; reader macro for easier cmdline handling
-; TODO: actual logic, not just cmdline handling
+
+(defn get-var-from-file [file offset]
+  (.seek file offset)
+  (int.from_bytes(.read file 4) "little"))
+
+(defn set-var-to-file [file offset value]
+  (.seek file offset)
+  (.write file (struct.pack "i" value)))
+
 ; TODO: find variables for gifts from gods and other special abilities in savefile
+; TODO: changing current weapon
+
 ; see this description of CNC Array format: http://community.clickteam.com/threads/41217-specs-for-CNC-ARRAY-format
 ; offset 0x1e: health
 ; offset 0x22: setting to 1 enables double jump, I don't think it does anything else
@@ -67,13 +77,29 @@
 (.add_argument parser "-L" "--location" :help "Teleport to chosen savespot" :type int)
 (.add_argument parser "-a" "--attack-power" :help "Set attack power" :type int)
 (.add_argument parser "-d" "--doublejump" :help "Enable/disable double jump" :type int :choices [0 1])
+(.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Elanduru, 5 - adult Elanduru with mask)"
+                                        :type int :choices (range 0 6))
 (.add_argument parser "-H" "--hammer" :help "Enable/disable hammer" :type int :choices [0 1])
 (.add_argument parser "-M" "--mojak" :help "Enable/disable Mojak" :type int :choices [0 1])
 (.add_argument parser "-O" "--ozar" :help "Enable/disable Ozar's Flame" :type int :choices [0 1])
 (.add_argument parser "-S" "--sigil" :help "Enable/disable Sigil" :type int :choices [0 1])
 (.add_argument parser "-W" "--weapon" :help "Current weapon" :type str
                                       :choices ["knife" "hammer" "mojak" "ozar" "sigil"])
-(.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Elanduru, 5 - adult Elanduru with mask)"
-                                        :type int :choices (range 0 6))
 (setv arguments (.parse_args parser))
-;(print (+ "slot" (str #|"slotnumber") ".sav"))
+(setv savefile-vars[ `(life ~(int "0x1e" 16)) ; known variable in savefile
+                     `(gems ~(int "0x3a" 16)) ; weapon handled separately to print string instead of int
+                     `(gems-max ~(int "0x56" 16))
+                     `(location ~(int "0xc6" 16))
+                     `(attack-power ~(int "0xaa" 16))
+                     `(doublejump ~(int "0x22" 16))
+                     `(elanduru ~(int "0x8e" 16))
+                     `(hammer ~(int "0x42" 16))
+                     `(mojak ~(int "0x5e" 16))
+                     `(ozar ~(int "0x76" 16))
+                     `(sigil ~(int "0x96" 16))])
+
+(if #|"print" (print (+ "Analyzing file " (+ "slot" (str #|"slotnumber") ".sav \nValues are now:"))))
+(with [(setv f (open (+ "slot" (str #|"slotnumber") ".sav") "r+b"))]
+  (for [i savefile-vars]
+    (lif #|(car i) (set-var-to-file f (last i) #|(car i)))
+    (if #|"print" (print (+ (car i) ": " (str (get-var-from-file f (last i))))))))
