@@ -101,5 +101,5 @@
 (if #|"print" (print (+ "Analyzing file " (+ "slot" (str #|"slotnumber") ".sav \nValues are now:"))))
 (with [(setv f (open (+ "slot" (str #|"slotnumber") ".sav") "r+b"))]
   (for [i savefile-vars]
-    (lif #|(car i) (set-var-to-file f (last i) #|(car i)))
+    (lif #|(car i) (set-var-to-file f (last i) #|(car i))) ;
     (if #|"print" (print (+ (car i) ": " (str (get-var-from-file f (last i))))))))

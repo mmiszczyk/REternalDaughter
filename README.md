@@ -1,4 +1,4 @@
-REternal Daughter v 0.1.0
+REternal Daughter v 0.2.0
 =========================
 
 About
@@ -19,12 +19,33 @@ screen). Experimental upscaling feature can be enabled by a -u command
 line switch, although it has issues with levels smaller than 640x480
 (see below).
 
+REternal Daughter also includes a save editor saveutil.py. It's still
+incomplete but the most important features are there.
+
 Issues with Eternal Daughter
 ----------------------------
 Eternal Daughter runs natively in a 320x240 resolution which is too low
 for modern GPUs. It also has problems with its MIDI playback functions
 as if a music track changes while a sound effect is playing, the sound
 effect will loop endlessly and the game will become unplayably slow.
+
+Usage: I just want to play the damn game already!
+-------------------------------------------------
+If you want a version of Eternal Daughter that will work on modern
+computers and can't be bothered with all that reverse engineering stuff,
+[just download that file and you're good to go]
+(https://github.com/mmiszczyk/REternalDaughter/releases/download/0.1.0/REternalDaughter.7z).
+This is Eternal Daughter with my best current patch applied and you
+should be able to run it out of the box.
+
+If you want to know more, customize the patches, edit savefiles or maybe
+even try a bit of reverse engineering yourself, read on. Keep in mind
+that while there are no prerequisites to running the pre-patched
+version, everything else requires you to have Python 3 with the
+following packages installed:
+
++ hy
++ bsdiff4
 
 Usage: reternal.py
 ------------------
@@ -233,7 +254,7 @@ TODO
 + fix the MIDI issue (might be hard to do as Cncs232.dll functions
   are accessed by offset instead of symbol so it's not trivial
   to write a drop-in replacement)
-+ RE save files
++ add missing features to save editor
 
 Author
 ------
