@@ -16,6 +16,7 @@
 
 (import argparse)
 
+(defreader | [str] `(getattr arguments ~str)) ; reader macro for easier cmdline handling
 ; TODO: actual logic, not just cmdline handling
 ; TODO: find variables for gifts from gods and other special abilities in savefile
 ; see this description of CNC Array format: http://community.clickteam.com/threads/41217-specs-for-CNC-ARRAY-format
@@ -75,3 +76,4 @@
 (.add_argument parser "-e" "--elanduru" :help "Pick Elanduru's form (0 - no Elanduru, 5 - adult Elanduru with mask)"
                                         :type int :choices (range 0 6))
 (setv arguments (.parse_args parser))
+;(print (+ "slot" (str #|"slotnumber") ".sav"))
