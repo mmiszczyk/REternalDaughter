@@ -34,7 +34,7 @@ Usage: I just want to play the damn game already!
 If you want a version of Eternal Daughter that will work on modern
 computers and can't be bothered with all that reverse engineering stuff,
 [just download that file and you're good to go]
-(https://github.com/mmiszczyk/REternalDaughter/releases/download/0.1.0/REternalDaughter.7z).
+(https://github.com/mmiszczyk/REternalDaughter/releases/download/0.2.0/REternalDaughter.7z).
 This is Eternal Daughter with my best current patch applied and you
 should be able to run it out of the box.
 
