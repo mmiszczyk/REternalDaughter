@@ -1,5 +1,7 @@
 #project stuff:
 /.idea/
+/bmploader/bmploader.dev
+/bmploader/bmploader.layout
 
 #game files
 /about.txt
@@ -15,3 +17,4 @@
 /fixres1.exe
 /fixres2.exe
 /Eternal Daughter.exe.bak
+

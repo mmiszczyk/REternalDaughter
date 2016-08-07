@@ -58,7 +58,7 @@
 (setv parser (argparse.ArgumentParser
   :description "Eternal Daughter save reader/editor. Part of the REternal Daughter project.
   To use, place in the game's folder or any other folder containing ED savefiles with slot{1-3}.sav."))
-(.add_argument parser "slot-number" :help "Save slot number" :type int :choices (range 1 4))
+(.add_argument parser "slotnumber" :help "Save slot number" :type int :choices (range 1 4))
 (.add_argument parser "-p" "--print" :action "store_true" :help "Print information about current savefile")
 (.add_argument parser "-l" "--life" :help "Set life to provided value" :type int)
 (.add_argument parser "-g" "--gems" :help "Set current number of gems (ammo)" :type int)
