@@ -33,8 +33,8 @@
                 `(~(int 4) ozar)
                 `(~(int 5) sigil)])
   (setv ret None)
-  (for [weapon weapons] (if reverse (if (= (car weapon) value) (setv ret (last weapon)))
-                                    (if (= (last weapon) value) (setv ret (car weapon)))))
+  (for [weapon weapons] (if reverse (if (= (car weapon) value) (setv ret (last weapon)))   ; get weapon from number
+                                    (if (= (last weapon) value) (setv ret (car weapon))))) ; get number from weapon
   ret)
 
 ; TODO: find variables for gifts from gods and other special abilities in savefile
@@ -110,8 +110,8 @@
 
 (if #|"print" (print (+ "Analyzing file " (+ "slot" (str #|"slotnumber") ".sav \nValues are now:"))))
 (with [(setv f (open (+ "slot" (str #|"slotnumber") ".sav") "r+b"))]
-  (for [i savefile-vars]
+  (for [i savefile-vars] ; handle known variables in savefile
     (lif #|(car i) (set-var-to-file f (last i) #|(car i))) ; lif will return true if attribute is set but has value 0
     (if #|"print" (print (+ (car i) ": " (str (get-var-from-file f (last i)))))))
-  (if #|"weapon" (set-var-to-file f (int "0x72" 16) (weapon-to-number #|"weapon" False)))
+  (if #|"weapon" (set-var-to-file f (int "0x72" 16) (weapon-to-number #|"weapon" False))) ; handle current weapon
   (if #|"print" (print (+ "current weapon: " (weapon-to-number (get-var-from-file f (int "0x72" 16)) True)))))
