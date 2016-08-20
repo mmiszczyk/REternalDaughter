@@ -47,33 +47,33 @@
 ; offset 0x2e: ? if something's not there, it wasn't rested
 ; offset 0x32: ?
 ; offset 0x36: ?
-; offest 0x3a: number of gems (ammo for secondary weapon)
-; offest 0x3e: ?
-; offest 0x42: setting to 1 unlocks hammer
-; offest 0x46: ?
-; offest 0x4a: ?
-; offest 0x4e: ?
-; offest 0x52: ?
-; offest 0x56: max gems
-; offest 0x5a: ?
-; offest 0x5e: setting to 1 enables mojak
-; offest 0x62: ?
-; offest 0x66: ?
-; offest 0x6a: ?
-; offest 0x6e: ?
-; offest 0x72: current weapon 1 - knife 2 - hammer 3 - mojak 4 - ozar 5 - sigil
-; offest 0x74: ?
-; offest 0x76: setting to 1 enables ozar
-; offest 0x7a: setting to 1 makes erlanduru appear as savegame icon
-; offest 0x7e: ?
-; offest 0x82: ?
-; offest 0x86: ?
-; offest 0x8a: ?
-; offest 0x8e: elanduru: 0 - no, 1-3 - young, 4 - adult, 5 - adult with mask
-; offest 0x92: ?
-; offest 0x96: setting to 1 enables sigil
-; offest 0xaa: attack power
-; offest 0xc6: current position
+; offset 0x3a: number of gems (ammo for secondary weapon)
+; offset 0x3e: ?
+; offset 0x42: setting to 1 unlocks hammer
+; offset 0x46: ?
+; offset 0x4a: ?
+; offset 0x4e: ?
+; offset 0x52: ?
+; offset 0x56: max gems
+; offset 0x5a: ?
+; offset 0x5e: setting to 1 enables mojak
+; offset 0x62: ?
+; offset 0x66: ?
+; offset 0x6a: ?
+; offset 0x6e: ?
+; offset 0x72: current weapon 1 - knife 2 - hammer 3 - mojak 4 - ozar 5 - sigil
+; offset 0x74: ?
+; offset 0x76: setting to 1 enables ozar
+; offset 0x7a: setting to 1 makes erlanduru appear as savegame icon
+; offset 0x7e: ?
+; offset 0x82: ?
+; offset 0x86: ?
+; offset 0x8a: ?
+; offset 0x8e: elanduru: 0 - no, 1-3 - young, 4 - adult, 5 - adult with mask
+; offset 0x92: ?
+; offset 0x96: setting to 1 enables sigil
+; offset 0xaa: attack power
+; offset 0xc6: current position
 
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser
