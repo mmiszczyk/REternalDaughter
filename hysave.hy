@@ -26,8 +26,18 @@
   (.seek file offset)
   (.write file (struct.pack "i" value)))
 
+(defn weapon-to-number [value reverse]
+  (setv weapons[`(~(int 1) knife)
+                `(~(int 2) hammer)
+                `(~(int 3) mojak)
+                `(~(int 4) ozar)
+                `(~(int 5) sigil)])
+  (setv ret None)
+  (for [weapon weapons] (if reverse (if (= (car weapon) value) (setv ret (last weapon)))
+                                    (if (= (last weapon) value) (setv ret (car weapon)))))
+  ret)
+
 ; TODO: find variables for gifts from gods and other special abilities in savefile
-; TODO: changing current weapon
 
 ; see this description of CNC Array format: http://community.clickteam.com/threads/41217-specs-for-CNC-ARRAY-format
 ; offset 0x1e: health
@@ -101,5 +111,7 @@
 (if #|"print" (print (+ "Analyzing file " (+ "slot" (str #|"slotnumber") ".sav \nValues are now:"))))
 (with [(setv f (open (+ "slot" (str #|"slotnumber") ".sav") "r+b"))]
   (for [i savefile-vars]
-    (lif #|(car i) (set-var-to-file f (last i) #|(car i))) ;
-    (if #|"print" (print (+ (car i) ": " (str (get-var-from-file f (last i))))))))
+    (lif #|(car i) (set-var-to-file f (last i) #|(car i))) ; lif will return true if attribute is set but has value 0
+    (if #|"print" (print (+ (car i) ": " (str (get-var-from-file f (last i)))))))
+  (if #|"weapon" (set-var-to-file f (int "0x72" 16) (weapon-to-number #|"weapon" False)))
+  (if #|"print" (print (+ "current weapon: " (weapon-to-number (get-var-from-file f (int "0x72" 16)) True)))))
