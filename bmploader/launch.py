@@ -53,7 +53,7 @@ def main():
         procData = win32process.CreateProcess('Eternal Daughter.exe', None, None, None, False, win32process.CREATE_SUSPENDED, None, None, si)
         
         # Inject the dll into the suspended process
-        inject_dll(procData[0], 'test.dll')
+        inject_dll(procData[0], 'bmploader.dll')
 
         # Resume the thread after the DLL has been injected.
         win32process.ResumeThread(procData[1])
