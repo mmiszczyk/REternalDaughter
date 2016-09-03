@@ -66,7 +66,7 @@ __declspec (dllexport) void DllClass::LoadBMPToWindow(HWND window)
 	return;
 }
 */
-BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
+__declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
 	switch(fdwReason)
 	{
