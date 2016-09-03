@@ -9,6 +9,9 @@ import win32ui
 import sys
 import os.path
 
+import time
+
+
 def panic(proc, reason):
         win32ui.MessageBox(reason, 'Launcher Error!', 0)
         win32api.TerminateProcess(proc, 1)
@@ -50,8 +53,11 @@ def main():
         # Create the process in a suspended state
         # The result is a tuple of (hProcess, hThread, dwProcessId, dwThreadId)
         si = win32process.STARTUPINFO()
-        procData = win32process.CreateProcess('Eternal Daughter.exe', None, None, None, False, win32process.CREATE_SUSPENDED, None, None, si)
-        
+        #procData = win32process.CreateProcess('fixres1.exe', None, None, None, False, win32process.CREATE_SUSPENDED, None, None, si)
+        procData = win32process.CreateProcess('fixres2.exe', None, None, None, False, 0, None, None, si)
+        time.sleep(1)
+        win32process.SuspendThread(procData[1])
+
         # Inject the dll into the suspended process
         inject_dll(procData[0], 'bmploader.dll')
 
@@ -60,4 +66,4 @@ def main():
 
 
 if __name__ == '__main__':
-main()
+        main()
