@@ -19,4 +19,6 @@ class DLLIMPORT DllClass
 		__declspec (dllexport) void LoadBMPToWindow(HWND window);
 };
 
+#define DLL_EXPORT extern "C" __declspec(dllexport)
+
 #endif

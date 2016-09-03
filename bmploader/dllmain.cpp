@@ -32,6 +32,7 @@
 //results in a corrupted executable. I'm not sure how to solve it
 
 #include "dll.h"
+#include <stdio.h>
 
 DllClass::DllClass()
 {
@@ -42,7 +43,7 @@ DllClass::~DllClass()
 {
 
 }
-
+/*
 __declspec (dllexport) void DllClass::LoadBMPToWindow(HWND window)
 {
 	//create a HDC with bitmap
@@ -64,7 +65,7 @@ __declspec (dllexport) void DllClass::LoadBMPToWindow(HWND window)
 	DeleteObject(bmp);
 	return;
 }
-
+*/
 BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
 	switch(fdwReason)
@@ -86,7 +87,30 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 			break;
 		}
 	}
+
+	//logfile for debugging
+	FILE* logfile = fopen("log.txt", "a");
+	fprintf(logfile, "%s", "Test");
+	fclose(logfile);
+
+	//create a HDC with bitmap
+	HWND* window = (HWND*)0x43fef8;
+	TCHAR path[4096];
+	GetFullPathName("img.bmp",4096,path,NULL);
+	HBITMAP bmp = (HBITMAP)LoadImage(NULL,path,IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+	HDC bmp_dc = CreateCompatibleDC(NULL);
+	HGDIOBJ ret = SelectObject(bmp_dc,bmp);
 	
+	//get HDC from window
+	HDC window_dc = GetDC(*window);
+	
+	//blit
+	BitBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, SRCCOPY);
+	
+	//cleanup
+	SelectObject(bmp_dc,ret);
+	DeleteDC(bmp_dc);
+	DeleteObject(bmp);
 	/* Return TRUE on success, FALSE on failure */
 	return TRUE;
 }
