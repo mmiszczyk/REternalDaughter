@@ -22,6 +22,8 @@ def inject_dll(proc, dll_path):
         if not os.path.isfile(dll_path):
                 panic(proc, 'DLL path specified does not exist')
 
+        dll_path = os.path.abspath(dll_path)
+
         # Pull in kernel32 from ctypes becaue pywin32 doesn't implement VirutallAllocEx or WriteProcessMemory.
         k32 = windll.kernel32
 
