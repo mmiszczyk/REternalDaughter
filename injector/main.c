@@ -3,6 +3,7 @@
 //also based on http://blog.opensecurityresearch.com/2013/01/windows-dll-injection-basics.html
 
 #include <windows.h>
+#include <string.h>
 
 typedef NTSTATUS (WINAPI *LPFUN_NtCreateThreadEx)
 (
@@ -34,9 +35,20 @@ struct NtCreateThreadExBuffer
 
 int main(int argc, char *argv[]) {
 	//start the game
+	char* executable = "fixres2.exe"; //hardcoded fixres2.exe for testing, will be different (macro?) in release
+	char* dll = "bmploader.dll";
 	PROCESS_INFORMATION procinfo = {0};
 	STARTUPINFO startupinfo = {0};
-	CreateProcess("fixres2.exe", NULL, NULL, NULL, FALSE, 0, NULL, NULL, &startupinfo, &procinfo); //hardcoded fixres2.exe for testing, will be different (macro?) in release
+	CreateProcess(executable, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &startupinfo, &procinfo);
 	Sleep(500); //wait to make sure we have a window
+	SuspendThread(procinfo.hThread);
+	
+	//now we're doing the injection
+	LPVOID dll_in_memory = VirtualAllocEx(procinfo.hProcess, NULL, (strlen(dll) + 1), MEM_RESERVE|MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+	WriteProcessMemory(procinfo.hProcess, dll_in_memory, dll, (strlen(dll) +1), NULL);
+	//TODO: LoadLibraryA, NtCreateThreadEx
+	
+	
+	ResumeThread(procinfo.hThread);
 	return 0;
 }
