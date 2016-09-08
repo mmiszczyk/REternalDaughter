@@ -43,29 +43,7 @@ DllClass::~DllClass()
 {
 
 }
-/*
-__declspec (dllexport) void DllClass::LoadBMPToWindow(HWND window)
-{
-	//create a HDC with bitmap
-	TCHAR path[4096];
-	GetFullPathName("img.bmp",4096,path,NULL);
-	HBITMAP bmp = (HBITMAP)LoadImage(NULL,path,IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
-	HDC bmp_dc = CreateCompatibleDC(NULL);
-	HGDIOBJ ret = SelectObject(bmp_dc,bmp);
-	
-	//get HDC from window
-	HDC window_dc = GetDC(window);
-	
-	//blit
-	BitBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, SRCCOPY);
-	
-	//cleanup
-	SelectObject(bmp_dc,ret);
-	DeleteDC(bmp_dc);
-	DeleteObject(bmp);
-	return;
-}
-*/
+
 __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
 {
 	switch(fdwReason)
@@ -94,7 +72,7 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 	fclose(logfile);
 
 	//create a HDC with bitmap
-	HWND* window = (HWND*)0x43fef8;
+	HWND* window = (HWND*)0x43fef8; //HWND changes but it's always stored at the same address so I can hardcode it
 	TCHAR path[4096];
 	GetFullPathName("img.bmp",4096,path,NULL);
 	HBITMAP bmp = (HBITMAP)LoadImage(NULL,path,IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
@@ -111,6 +89,5 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 	SelectObject(bmp_dc,ret);
 	DeleteDC(bmp_dc);
 	DeleteObject(bmp);
-	/* Return TRUE on success, FALSE on failure */
 	return TRUE;
 }
