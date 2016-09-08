@@ -45,9 +45,10 @@ int main(int argc, char *argv[]) {
 	
 	//now we're doing the injection
 	LPVOID dll_in_memory = VirtualAllocEx(procinfo.hProcess, NULL, (strlen(dll) + 1), MEM_RESERVE|MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-	WriteProcessMemory(procinfo.hProcess, dll_in_memory, dll, (strlen(dll) +1), NULL);
-	//TODO: LoadLibraryA, NtCreateThreadEx
+	WriteProcessMemory(procinfo.hProcess, dll_in_memory, dll, (strlen(dll) +1), NULL); //put path to dll in memory
 	
+	LPVOID loadlib = GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "LoadLibraryA"); //get DLL loading function
+	//TODO: NtCreateThreadEx, aka actually injecting the DLL	
 	
 	ResumeThread(procinfo.hThread);
 	return 0;
