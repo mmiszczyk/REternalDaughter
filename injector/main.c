@@ -48,7 +48,9 @@ int main(int argc, char *argv[]) {
 	WriteProcessMemory(procinfo.hProcess, dll_in_memory, dll, (strlen(dll) +1), NULL); //put path to dll in memory
 	
 	LPVOID loadlib = GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "LoadLibraryA"); //get DLL loading function
-	//TODO: NtCreateThreadEx, aka actually injecting the DLL	
+	HMODULE ntdll = GetModuleHandle("ntdll.dll");
+	LPFUN_NtCreateThreadEx createthread = (LPFUN_NtCreateThreadEx)GetProcAddress(ntdll, "NtCreateThreadEx");
+	NTSTATUS ret = createthread(procinfo.hThread, 0x1FFFFF, NULL, procinfo.hProcess, loadlib, dll_in_memory, FALSE, NULL, NULL, NULL, NULL);
 	
 	ResumeThread(procinfo.hThread);
 	return 0;
