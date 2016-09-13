@@ -1,9 +1,10 @@
 EXPORTS
-    _ZN8DllClass15LoadBMPToWindowEP6HWND__ @1
-    _ZN8DllClassC1Ev @2
-    _ZN8DllClassC2Ev @3
-    _ZN8DllClassD0Ev @4
-    _ZN8DllClassD1Ev @5
-    _ZN8DllClassD2Ev @6
-    _ZTI8DllClass @7 DATA
-    _ZTV8DllClass @8 DATA
+    DllMain = DllMain@12 @1
+    DllMain@12 @2
+    _ZN8DllClassC1Ev @3
+    _ZN8DllClassC2Ev @4
+    _ZN8DllClassD0Ev @5
+    _ZN8DllClassD1Ev @6
+    _ZN8DllClassD2Ev @7
+    _ZTI8DllClass @8 DATA
+    _ZTV8DllClass @9 DATA
