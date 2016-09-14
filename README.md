@@ -63,6 +63,7 @@ freely downloaded from [here](http://www.derekyu.com/games.html).
                             Input file (default: "Eternal Daughter.exe")
       -u, --upscale         Upscale the game instead of just forcing higher
                             resolution (experimental)
+      -b, --borders         Draw borders (experimental; overrides -u)
       -p PATCHFILE, --patchfile PATCHFILE
                             Custom patchfile in BSDiff format (overrides -u)
       -n, --nofix           Don't fix the game, just run it (overrides -u and -p)
@@ -247,8 +248,7 @@ I use that knowledge to write a save editor/analyzer.
 TODO
 ----
 + better upscaling (draw empty window after switching stages?)
-+ don't waste so much screen real estate in non-upscaling mode
-  (find a way to draw some nice-looking border in the window)
++ find a way to stop the border image from blinking
 + find a way to enable windowed mode (the game claims it supports one
   but it doesn't work)
 + fix the MIDI issue (might be hard to do as Cncs232.dll functions
@@ -258,7 +258,14 @@ TODO
 
 Author
 ------
-REternal Daughter was written by Maciej Miszczyk
+REternal Daughter was written by Maciej Miszczyk. Andoryuuta provided
+a lot of help with DLL injection so the third patch probably wouldn't
+happen without him, even though his code isn't currently used anywhere.
+The picutre currently used as a border taken from [a fanart gallery in
+this Let's Play](http://lparchive.org/Eternal-Daughter/) but I don't
+know anything about the author beside the fact that his name is Igor.
+If you're the author and don't want it used here, feel free to contact
+me.
 
 License
 -------
