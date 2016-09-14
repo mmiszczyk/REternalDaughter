@@ -42,7 +42,10 @@ HBITMAP bmp;
 
 DWORD WINAPI blit_thread(void* data)
 {
-	while(1) TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, 0xffffff);
+	while(1){
+		TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, 0xffffff);
+		Sleep(100); //try not killing performance
+	} 
 }
 
 DllClass::DllClass()
