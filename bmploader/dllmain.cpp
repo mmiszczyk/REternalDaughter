@@ -43,8 +43,8 @@ HBITMAP bmp;
 DWORD WINAPI blit_thread(void* data)
 {
 	while(1){
-		TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, 0xffffff);
-		Sleep(100); //try not killing performance
+		TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, 0);
+		Sleep(10); //try not killing performance
 	} 
 }
 
@@ -66,7 +66,7 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 		{
 			//logfile for debugging
 			FILE* logfile = fopen("log.txt", "a");
-			fprintf(logfile, "%s", "Test");
+			fprintf(logfile, "%s", "Attaching...\n");
 			fclose(logfile);
 
 			//create a HDC with bitmap
@@ -88,9 +88,14 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 		case DLL_PROCESS_DETACH:
 		{
 			//cleanup
+			/*FILE* logfile = fopen("log.txt", "a");
+			fprintf(logfile, "%s", "Detaching...\n");
+			fclose(logfile);
 			SelectObject(bmp_dc,ret);
 			DeleteDC(bmp_dc);
-			DeleteObject(bmp);
+			DeleteObject(bmp);*/
+			//cleanup breaks the functionality, therefore no cleanup
+			//fuck yeah, memory leaks!
 			break;
 		}
 		case DLL_THREAD_ATTACH:
