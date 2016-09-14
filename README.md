@@ -114,10 +114,15 @@ Usage: saveutil.py
 
 Reversing Eternal Daughter
 --------------------------
+
+### Binary patches ###
+
 Eternal Daughter was created with an old version of Multimedia Fusion,
 a game engine relatively popular among indie developers for its
 user-friendly 'no programming' approach.
+
 ![Eternal Daughter.exe info](images/exeinfo.png)
+
 Game logic seems to reside completely inside Eternal Daughter.exe.
 The game also loads a dynamic library Cncs232.dll which contains
 multimedia-related functionality (presumably, this includes buggy
@@ -130,7 +135,9 @@ Resource Hacker is unable to extract any images or music. Even strings
 table doesn't contain the in-game text, just standard diagnostic
 messages. Opening Cncs232.dll with it is similarly fruitless: it has
 a few bitmaps but nothing similar to game content.
+
 ![Eternal Daughter.exe in Resource Hacker](images/reshack.png)
+
 ![Cncs232.dll in Resource Hacker](images/reshack2.png)
 
 As quick google search doesn't show any way of extracting data from
@@ -143,6 +150,7 @@ application's text section. In that cave, I overwrite relevant data
 section fragments with 640x480 (values here presented in hex), call the
 function that should have been called instead of my hook and return to
 normal flow.
+
 ![Fixing resolution](images/fixres1.png)
 
 This appears to be working well: the whole game is drawn in higher
@@ -152,24 +160,69 @@ bigger one is that if you come from a bigger level to a smaller one,
 those larger portions are not redrawn and it looks stupid. You can
 enable this option with -u command line switch in reternal.py but it's
 not the default.
+
 ![Everything seems fine](images/hi-res.png)
+
 ![But it doesn't work the way it should](images/hi-res-glitch.png)
 
 I change my strategy: the game will run in a higher resolution but
 it's not going to be upscaled. I modify the executable again, this time
 hardcoding  640x480 in two functions that draw the window and leaving
 the values from the data section intact for drawing game content.
+
 ![Fixing resolution: another attempt](images/fixres2.png)
 
 Of course, the game now isn't really in high resolution. It's still
-in 320x240, it's just that the game window is bigger so the GPus don't
+in 320x240, it's just that the game window is bigger so the GPUs don't
 go crazy. It also doesn't look as well as it should but it's far less
 annoying than the previous version.
+
 ![Not optimal but works](images/low-res.png)
 
 I then turn my fixes into a Python/Hy (Python because rapid prototyping,
 Hy because I like Lisp-like syntax) program. There's a lot more that can
 be done but I think it's a decent start.
+
+### bmploader.dll ###
+
+Non-upscaling patch wastes a lot of screen real estate, with the game
+being played in a small rectangle in the middle of a black screen. The
+simplest solution here would be to do what the developers of shmups
+(and other games designed for vertically-aligned arcades) do: just draw
+the borders around everything. Because of the issues with upscaling mode,
+I assume it should be easy: just draw it once inside the game's window
+and nothing should overwrite it.
+
+After trying and failing to this in assembly, I decide to write
+a library in C++ and just call a necessary function from assembly.
+I then try to add the function as an import using a variety of Portable
+Executable editing tools. They all fail miserably so I do what every
+good programmer/hacker/cracker/reverser would do in this situation:
+I harness the power of Google, enter a carefully chosen query
+('reverse engineering games') and absorb the knowledge (I ask for help
+on the first site that pops up in results).
+
+[A very helpful user](https://github.com/Andoryuuta) sends me some code
+which starts a process and injects a DLL into it. I modify my library
+to do everything in the DllMain function, inject it and fail. Strangely
+enough, Andoryuuta (the user who sent me the injector) is able to get
+it to work without issues. I try to educate myself about why this might
+be the case and discover some articles about session separation on
+different versions of Windows. I write my own injector which uses
+NtCreateThreadEx and therefore should bypass session separation.
+Unfortunately, the problem lies elsewhere ad this also doesn't work, and
+anything that uses NtCreateThreadEx pisses off antivirus software.
+
+I manage to do a binary patch (not unlike the upscaling one) that hooks
+execution and calls LoadLibraryA. Unfortunately, the borders get
+overwritten for some reason so I adopt the strategy proposed by
+Andoryuuta: spawning a thread and drawing in a loop. This looks good
+on screenshots but in-game there's a lot of very annoying blinking.
+Also, apparently it doesn't work on every machine and I'm not sure why.
+Still, I make the most of what I have and turn some old Eternal Daughter
+fanart into a suitable bitmap.
+
+![Imagine this but with blinking](images/borders.png)
 
 Reversing save files
 --------------------
@@ -227,8 +280,8 @@ is a 1-indexed array of 32-bit integers.
 Through trial and error, I discovered the meanings behind some of the
 variables in savefile:
 
-|Offset |Variable           |Comments                                              |
-|:-----:|:-----------------:|------------------------------------------------------|
+|Offst |Variable           |Comments  -                                            |
+|:----:|:-----------------:|-------------------------------------------------------|
 |0x1e  |Health              |-                                                     |
 |0x22  |Double jump         |True/false                                            |
 |0x3a  |Current gems (ammo) |Can be larger than max                                |
