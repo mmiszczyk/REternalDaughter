@@ -58,14 +58,16 @@ ______    /                          /)
 (.add_argument parser "-i" "--input" :help "Input file (default: \"Eternal Daughter.exe\")")
 (.add_argument parser "-u" "--upscale" :action "store_true"
                       :help "Upscale the game instead of just forcing higher resolution (experimental)")
-(.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u)")
-(.add_argument parser "-n" "--nofix" :action "store_true" :help "Don't fix the game, just run it (overrides -u and -p)")
+(.add_argument parser "-b" "--borders" :action "store_true" :help "Draw borders (experimental; overrides -u)")
+(.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u and -b)")
+(.add_argument parser "-n" "--nofix" :action "store_true" :help "Don't fix the game, just run it (overrides -u, -b and -p)")
 (.add_argument parser "-r" "--replace" :action "store_true"
                       :help "Permanently replace input file with a patched version (overrides -n)")
 (setv arguments (.parse_args parser))
 
 (if arguments.upscale   (setv patchfile "patch1")             ; increase resolution and upscale
                         (setv patchfile "patch2"))            ; increase resolution but don't upscale
+(if arguments.borders   (setv patchfile "patch3"))            ; increase, don't upscale, draw borders
 (if arguments.patchfile (setv patchfile arguments.patchfile)) ; custom patchfile
 
 (if arguments.input (setv gamefile arguments.input)         ; custom gamefile
