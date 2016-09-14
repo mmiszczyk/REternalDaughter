@@ -14,22 +14,6 @@
 *    further details)    *
 *************************/
 
-//this is a very basic library
-//it exports a function that takes HWND as an argument
-//and writes a bitmap from "img.bmp" in the same folder
-//into the window to which the handle points
-
-//if I get the game to load this DLL, I could hijack execution,
-//push HWND onto stack and paint whatever I want in the game window
-
-//if I could do that before anything game-related is displayed
-//on an executable which changes resolution and doesn't upscale,
-//I'd solve the problem of wasted screen real estate because
-//portions of image greater than 320x240 would never be overwritten
-
-//unfortunately, I wasn't able to get it to work
-//I tried adding this as import to the game .exe but it always
-//results in a corrupted executable. I'm not sure how to solve it
 
 #include "dll.h"
 #include <stdio.h>
@@ -42,9 +26,10 @@ HBITMAP bmp;
 
 DWORD WINAPI blit_thread(void* data)
 {
+	//TODO: fix the blinking
 	while(1){
 		TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, RGB(255,255,255));
-		Sleep(1); //try not killing performance
+		Sleep(1);
 	} 
 }
 
@@ -65,9 +50,9 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 		case DLL_PROCESS_ATTACH:
 		{
 			//logfile for debugging
-			FILE* logfile = fopen("log.txt", "a");
+			/*FILE* logfile = fopen("log.txt", "a");
 			fprintf(logfile, "%s", "Attaching...\n");
-			fclose(logfile);
+			fclose(logfile);*/
 
 			//create a HDC with bitmap
 			HWND* window = (HWND*)0x43fef8; //HWND changes but it's always stored at the same address so I can hardcode it
