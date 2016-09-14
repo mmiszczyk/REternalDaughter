@@ -218,7 +218,7 @@ execution and calls LoadLibraryA. Unfortunately, the borders get
 overwritten for some reason so I adopt the strategy proposed by
 Andoryuuta: spawning a thread and drawing in a loop. This looks good
 on screenshots but in-game there's a lot of very annoying blinking.
-Also, apparently it doesn't work on every machine and I'm not sure why.
+Also, apparently it doesn't work on some machines and I'm not sure why.
 Still, I make the most of what I have and turn some old Eternal Daughter
 fanart into a suitable bitmap.
 
