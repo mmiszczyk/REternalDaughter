@@ -33,6 +33,17 @@
 
 #include "dll.h"
 #include <stdio.h>
+#include <windows.h>
+
+HDC window_dc;
+HDC bmp_dc;
+HGDIOBJ ret;
+HBITMAP bmp;
+
+DWORD WINAPI blit_thread(void* data)
+{
+	while(1) TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, 0xffffff);
+}
 
 DllClass::DllClass()
 {
@@ -59,24 +70,24 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 			HWND* window = (HWND*)0x43fef8; //HWND changes but it's always stored at the same address so I can hardcode it
 			TCHAR path[4096];
 			GetFullPathName("img.bmp",4096,path,NULL);
-			HBITMAP bmp = (HBITMAP)LoadImage(NULL,path,IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
-			HDC bmp_dc = CreateCompatibleDC(NULL);
-			HGDIOBJ ret = SelectObject(bmp_dc,bmp);
+			bmp = (HBITMAP)LoadImage(NULL,path,IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+			bmp_dc = CreateCompatibleDC(NULL);
+			ret = SelectObject(bmp_dc,bmp);
 	
 			//get HDC from window
-			HDC window_dc = GetDC(*window);
+			window_dc = GetDC(*window);
 
 			//blit
-			BitBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, SRCCOPY);
-
+			//BitBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, SRCCOPY);
+			//TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, 0xffffff);
+			CreateThread(NULL, 0, blit_thread, NULL, 0, NULL);
+		}
+		case DLL_PROCESS_DETACH:
+		{
 			//cleanup
 			SelectObject(bmp_dc,ret);
 			DeleteDC(bmp_dc);
 			DeleteObject(bmp);
-			break;
-		}
-		case DLL_PROCESS_DETACH:
-		{
 			break;
 		}
 		case DLL_THREAD_ATTACH:
