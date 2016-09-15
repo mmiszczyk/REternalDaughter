@@ -49,9 +49,9 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 			fclose(logfile);*/
 
 			//for usleep
-		    WORD wVersionRequested = MAKEWORD(1,0);
-		    WSADATA wsaData;
-		    WSAStartup(wVersionRequested, &wsaData);
+			WORD wVersionRequested = MAKEWORD(1,0);
+			WSADATA wsaData;
+			WSAStartup(wVersionRequested, &wsaData);
 
 			//create a HDC with bitmap
 			HWND* window = (HWND*)0x43fef8; //HWND changes but it's always stored at the same address so I can hardcode it
@@ -98,14 +98,14 @@ __declspec (dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LP
 //snippet from https://blogs.msdn.microsoft.com/cellfish/2008/09/17/sleep-less-than-one-millisecond/
 int usleep(long usec)
 {
-    struct timeval tv;
-    fd_set dummy;
-    SOCKET s = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-    FD_ZERO(&dummy);
-    FD_SET(s, &dummy);
-    tv.tv_sec = usec/1000000L;
-    tv.tv_usec = usec%1000000L;
-    return select(0, 0, 0, &dummy, &tv);
+	struct timeval tv;
+	fd_set dummy;
+	SOCKET s = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+	FD_ZERO(&dummy);
+	FD_SET(s, &dummy);
+	tv.tv_sec = usec/1000000L;
+	tv.tv_usec = usec%1000000L;
+	return select(0, 0, 0, &dummy, &tv);
 }
 
 DWORD WINAPI blit_thread(void* data)
