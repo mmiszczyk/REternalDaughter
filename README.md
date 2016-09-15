@@ -218,7 +218,6 @@ execution and calls LoadLibraryA. Unfortunately, the borders get
 overwritten for some reason so I adopt the strategy proposed by
 Andoryuuta: spawning a thread and drawing in a loop. This looks good
 on screenshots but in-game there's a lot of very annoying blinking.
-Also, apparently it doesn't work on some machines and I'm not sure why.
 Still, I make the most of what I have and turn some old Eternal Daughter
 fanart into a suitable bitmap.
 
@@ -312,8 +311,8 @@ TODO
 Author
 ------
 REternal Daughter was written by Maciej Miszczyk. Andoryuuta provided
-a lot of help with DLL injection so the third patch probably wouldn't
-happen without him, even though his code isn't currently used anywhere.
+a lot of help with DLL injection and fixed a bug in the third patch so
+the border-drawing function probably wouldn't happen without him.
 The picutre currently used as a border taken from [a fanart gallery in
 this Let's Play](http://lparchive.org/Eternal-Daughter/) but I don't
 know anything about the author beside the fact that his name is Igor.
