@@ -113,6 +113,6 @@ DWORD WINAPI blit_thread(void* data)
 	//TODO: fix the blinking
 	while(1){
 		TransparentBlt(window_dc, 0, 0, 640, 480, bmp_dc, 0, 0, 640, 480, RGB(255,255,255));
-		usleep(1);
+		usleep(1L);
 	} 
 }
