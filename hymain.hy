@@ -22,7 +22,7 @@
 
 ;TODO: windowed mode, fix upscaling, maybe also upscale by stretching
 
-(import bsdiff4 subprocess os argparse shutil)
+(import bsdiff4 subprocess os argparse shutil sys)
 
 (defn replace-with-patch [gamepath patchpath]
   (shutil.copy2 gamepath (+ gamepath ".bak"))
@@ -50,7 +50,10 @@ ______    /                          /)
                 (_/
 ")
 (print "Eternal Daughter by Blackeye Software, 2002")
-(print "Fix by Maciej Miszczyk, 2016"))
+(print "Fix by Maciej Miszczyk, 2016")
+(print "Screen border image originally by Igor")
+(print "Special thanks to Mastigophoran (original windowed mode fix), Andoryuuta (help with border-drawing patch)")
+(print "and Azurinel (help with windowed mode fix)."))
 
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser
@@ -67,17 +70,22 @@ ______    /                          /)
                       :help "Don't fix the game, just run it (overrides -u, -b, --noborders and -p)")
 (.add_argument parser "-r" "--replace" :action "store_true"
                       :help "Permanently replace input file with a patched version (overrides -n)")
+(.add_argument parser "-c" "--cncs232" :action "store_true" :help "Fix Cncs232.dll (you should only run this once)")
 (setv arguments (.parse_args parser))
 
-(cond [arguments.upscale       (setv patchfile "patch1")]            ; increase resolution and upscale
-      [arguments.noborders     (setv patchfile "patch3")]            ; increase resolution but don't upscale
-      [arguments.borders       (setv patchfile "patch2")]            ; increase, don't upscale, draw borders
-      [arguments.patchfile     (setv patchfile arguments.patchfile)] ; custom patchfile
+
+(cond [arguments.patchfile     (setv patchfile arguments.patchfile)] ; custom patchfile
+      [arguments.noborders     (setv patchfile "patch2")]            ; increase resolution but don't upscale
+      [arguments.borders       (setv patchfile "patch3")]            ; increase, don't upscale, draw borders
+      [arguments.upscale       (setv patchfile "patch1")]            ; increase resolution and upscale
       [True                    (setv patchfile "patch4")])           ; windowed mode (default)
 
 (if arguments.input (setv gamefile arguments.input)         ; custom gamefile
                     (setv gamefile "Eternal Daughter.exe")) ; default
 (greet)
+
+(if arguments.cncs232 (replace-with-patch "Cncs232.dll" "cncs-patch")) ; fix Cncs232
+
 (if arguments.replace (replace-with-patch gamefile patchfile)                      ; replace with patch
                       (if arguments.nofix (subprocess.call gamefile)               ; just run
                                           (start-custom-game gamefile patchfile))) ; temporary patch (default)

@@ -1,4 +1,4 @@
-REternal Daughter v 0.2.0
+REternal Daughter v 1.0.0
 =========================
 
 About
@@ -34,9 +34,9 @@ Usage: I just want to play the damn game already!
 If you want a version of Eternal Daughter that will work on modern
 computers and can't be bothered with all that reverse engineering stuff,
 [just download that file and you're good to go]
-(https://github.com/mmiszczyk/REternalDaughter/releases/download/0.2.0/REternalDaughter.7z).
-This is Eternal Daughter with my best current patch applied and you
-should be able to run it out of the box.
+(https://github.com/mmiszczyk/REternalDaughter/releases/download/1.0.0/REternalDaughter.7z).
+This is a collection of pre-patched binaries with an easy to use launcher
+that should work out of the box.
 
 If you want to know more, customize the patches, edit savefiles or maybe
 even try a bit of reverse engineering yourself, read on. Keep in mind
@@ -256,6 +256,11 @@ function which returns a hardcoded string ending with /NOF.
 This is the default behavior as it's the least problematic one (no
 additional glitches, no unused screen real estate, no blinking).
 
+Based on the informations from Mastigophoran's pastebin, I also made
+a patch which upgrades Cncs232.dll to a new version. I haven't done
+enough testing to confirm whether it fixes all MIDI issues but if it
+doesn't, the project still has a lot to do.
+
 Reversing save files
 --------------------
 Eternal Daughter uses slotX.sav for holding saved games, where X is
@@ -344,6 +349,10 @@ Author
 REternal Daughter was written by Maciej Miszczyk. Andoryuuta provided
 a lot of help with DLL injection and fixed a bug in the third patch so
 the border-drawing function probably wouldn't happen without him.
+Most of the fourth patch was made following Mastigophoran's instructions
+provided indirectly by Azurinel so they too deserve a mention - there
+wouldn't be windowed mode without them.
+
 The picutre currently used as a border taken from [a fanart gallery in
 this Let's Play](http://lparchive.org/Eternal-Daughter/) but I don't
 know anything about the author beside the fact that his name is Igor.

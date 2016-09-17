@@ -34,4 +34,10 @@ bsdiff4.file_diff("Eternal Daughter.exe", "windowed.exe", "patch4")
 print("Done!")
 print()
 
-print("Patching completed!")
+print("Making Cncs232.dll patch...")
+# this should upgrade to the newest version of Cncs232.dll and fix some midi problems
+bsdiff4.file_diff("cncs232-old.dll", "cncs232-new.dll", "cncs-patch")
+print("Done!")
+print()
+
+print("Patchmaking completed!")

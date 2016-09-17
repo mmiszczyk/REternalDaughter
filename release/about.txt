@@ -1,0 +1,21 @@
+------------------------------------------------------------------
+Eternal Daughter
+(c)2002 Blackeye Software
+------------------------------------------------------------------
+
+Eternal Daughter is made by Blackeye Software.
+
+Please visit our website and check out our other free games!
+
+http://www.classicgaming.com/blackeyesoftware
+
+------------------------------------------------------------------
+REternal Daughter 1.0.0
+(c)2016 Maciej Miszczyk
+------------------------------------------------------------------
+
+Unofficial patched version by Maciej Miszczyk. Patches (not
+
+the game itself licensed under GPL3) - sources available at
+
+https://github.com/mmiszczyk/REternalDaughter

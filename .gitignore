@@ -12,6 +12,8 @@
 /windowed.txt
 /slot1.sav
 /blind.dat
+/release/bin/*.exe
+/release/bin/*.dll
 
 #modified binaries
 /fixres1.exe
