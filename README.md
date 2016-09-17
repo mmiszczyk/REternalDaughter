@@ -339,9 +339,6 @@ TODO
 ----
 + better upscaling (draw empty window after switching stages?)
 + find a way to stop the border image from blinking
-+ fix the MIDI issue (might be hard to do as Cncs232.dll functions
-  are accessed by offset instead of symbol so it's not trivial
-  to write a drop-in replacement)
 + add missing features to save editor
 
 Author
