@@ -181,7 +181,8 @@ annoying than the previous version.
 
 I then turn my fixes into a Python/Hy (Python because rapid prototyping,
 Hy because I like Lisp-like syntax) program. There's a lot more that can
-be done but I think it's a decent start.
+be done but I think it's a decent start. In REternal Daughter, this
+behavior can be enabled with a --noborders command line switch.
 
 ### bmploader.dll ###
 
@@ -222,6 +223,31 @@ Still, I make the most of what I have and turn some old Eternal Daughter
 fanart into a suitable bitmap.
 
 ![Imagine this but with blinking](images/borders.png)
+
+This behavior can be enable with -b command line switch.
+
+### Binary patching 2: Windowed Daughter ###
+
+In [Mastigophoran's Let's Play](http://lparchive.org/Eternal-Daughter/),
+he claimed to have found a way to enable windowed mode by hex editing
+the game's executable. While I wasn't able to get in touch with him,
+I contacted Azurinel, a prominent Eternal Daughter speedrunner and
+[world record holder](https://www.youtube.com/watch?v=V2zXlis3jF0)
+(spoilers, obviously). Azurinel knew the details of Mastigophoran's
+modifications, [which are described here](http://pastebin.com/qvL3q00V).
+With this patch, I've been able to get the game to run in windowed mode.
+
+![Eternal Window](images/window.png)
+
+This patch didn't enable windowed mode by default, it only fixed the
+non-implemented /NOF command line switch. To make my patch more
+standalone, I also replaced the call to GetCommandLineA with my fake
+function which returns a hardcoded string ending with /NOF.
+
+![Because strcat in assembly is too much work](images/enablewindowed.png)
+
+This is the default behavior as it's the least problematic one (no
+additional glitches, no unused screen real estate, no blinking).
 
 Reversing save files
 --------------------
@@ -301,8 +327,6 @@ TODO
 ----
 + better upscaling (draw empty window after switching stages?)
 + find a way to stop the border image from blinking
-+ find a way to enable windowed mode (the game claims it supports one
-  but it doesn't work)
 + fix the MIDI issue (might be hard to do as Cncs232.dll functions
   are accessed by offset instead of symbol so it's not trivial
   to write a drop-in replacement)

@@ -54,21 +54,26 @@ ______    /                          /)
 
 ;handle command line arguments
 (setv parser (argparse.ArgumentParser
-  :description "Unofficial Eternal Daughter resolution fix. Default settings work if placed in the game's folder."))
+  :description "Unofficial Eternal Daughter patch. Default settings work if placed in the game's folder."
+  :epilog      "Without other arguments, the game will be started in windowed mode."))
 (.add_argument parser "-i" "--input" :help "Input file (default: \"Eternal Daughter.exe\")")
 (.add_argument parser "-u" "--upscale" :action "store_true"
-                      :help "Upscale the game instead of just forcing higher resolution (experimental)")
-(.add_argument parser "-b" "--borders" :action "store_true" :help "Draw borders (experimental; overrides -u)")
-(.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u and -b)")
-(.add_argument parser "-n" "--nofix" :action "store_true" :help "Don't fix the game, just run it (overrides -u, -b and -p)")
+                      :help "Upscale the game (experimental)")
+(.add_argument parser "-b" "--borders" :action "store_true"
+                      :help "High resolution with screen borders (experimental; overrides -u)")
+(.add_argument parser "--noborders" :action "store_true" :help "Just force higher resolution (overrides -u and -b)")
+(.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u, -b and --noborders)")
+(.add_argument parser "-n" "--nofix" :action "store_true"
+                      :help "Don't fix the game, just run it (overrides -u, -b, --noborders and -p)")
 (.add_argument parser "-r" "--replace" :action "store_true"
                       :help "Permanently replace input file with a patched version (overrides -n)")
 (setv arguments (.parse_args parser))
 
-(if arguments.upscale   (setv patchfile "patch1")             ; increase resolution and upscale
-                        (setv patchfile "patch2"))            ; increase resolution but don't upscale
-(if arguments.borders   (setv patchfile "patch3"))            ; increase, don't upscale, draw borders
-(if arguments.patchfile (setv patchfile arguments.patchfile)) ; custom patchfile
+(cond [arguments.upscale       (setv patchfile "patch1")]            ; increase resolution and upscale
+      [arguments.noborders     (setv patchfile "patch3")]            ; increase resolution but don't upscale
+      [arguments.borders       (setv patchfile "patch2")]            ; increase, don't upscale, draw borders
+      [arguments.patchfile     (setv patchfile arguments.patchfile)] ; custom patchfile
+      [True                    (setv patchfile "patch4")])           ; windowed mode (default)
 
 (if arguments.input (setv gamefile arguments.input)         ; custom gamefile
                     (setv gamefile "Eternal Daughter.exe")) ; default
