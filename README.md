@@ -53,22 +53,29 @@ To use REternal Daughter, copy its files to your Eternal Daughter
 directory and run reternal.py. If you don't have the game, it can be
 freely downloaded from [here](http://www.derekyu.com/games.html).
 
-    usage: reternal.py [-h] [-i INPUT] [-u] [-p PATCHFILE] [-n] [-r]
+    usage: reternal.py [-h] [-i INPUT] [-u] [-b] [--noborders] [-p PATCHFILE] [-n]
+                       [-r]
     
-    Unofficial Eternal Daughter resolution fix
+    Unofficial Eternal Daughter patch. Default settings work if placed in the
+    game's folder.
     
     optional arguments:
       -h, --help            show this help message and exit
       -i INPUT, --input INPUT
                             Input file (default: "Eternal Daughter.exe")
-      -u, --upscale         Upscale the game instead of just forcing higher
-                            resolution (experimental)
-      -b, --borders         Draw borders (experimental; overrides -u)
+      -u, --upscale         Upscale the game (experimental)
+      -b, --borders         High resolution with screen borders (experimental;
+                            overrides -u)
+      --noborders           Just force higher resolution (overrides -u and -b)
       -p PATCHFILE, --patchfile PATCHFILE
-                            Custom patchfile in BSDiff format (overrides -u)
-      -n, --nofix           Don't fix the game, just run it (overrides -u and -p)
+                            Custom patchfile in BSDiff format (overrides -u, -b
+                            and --noborders)
+      -n, --nofix           Don't fix the game, just run it (overrides -u, -b,
+                            --noborders and -p)
       -r, --replace         Permanently replace input file with a patched version
                             (overrides -n)
+    
+    Without other arguments, the game will be started in windowed mode.
       
 Usage: saveutil.py
 ------------------
