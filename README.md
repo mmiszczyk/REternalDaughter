@@ -20,7 +20,7 @@ in img.bmp file). Experimental upscaling feature can be enabled by a -u
 command line switch, although it has issues with levels smaller than
 640x480 (see below). Compared to the original game, it uses a newer
 version of Cncs232.dll which may fix some of the issues related to MIDI
-playbach.
+playback.
 
 REternal Daughter also includes a save editor saveutil.py. It's still
 incomplete but the most important features are there.
