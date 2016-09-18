@@ -13,11 +13,14 @@ freeware in 2002. More information about the game can be found in
 [this article written by the author of REternal Daughter]
 (http://www.hardcoregaming101.net/eternaldaughter/eternaldaughter.htm).
 
-Currently, REternal Daughter is able to run the game in a supported
-640x480 resolution without upscaling (game as a 'window' within a black
-screen). Experimental upscaling feature can be enabled by a -u command
-line switch, although it has issues with levels smaller than 640x480
-(see below).
+REternal Daughter can run the game in a window. It is als able to run
+the game in a supported 640x480 resolution without upscaling (game as
+a 'window' within a black screen or surrounded by screen borders stored
+in img.bmp file). Experimental upscaling feature can be enabled by a -u
+command line switch, although it has issues with levels smaller than
+640x480 (see below). Compared to the original game, it uses a newer
+version of Cncs232.dll which may fix some of the issues related to MIDI
+playbach.
 
 REternal Daughter also includes a save editor saveutil.py. It's still
 incomplete but the most important features are there.
