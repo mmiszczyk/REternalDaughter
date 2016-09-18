@@ -22,7 +22,7 @@
 
 ;TODO: windowed mode, fix upscaling, maybe also upscale by stretching
 
-(import bsdiff4 subprocess os argparse shutil sys)
+(import bsdiff4 subprocess os argparse shutil)
 
 (defn replace-with-patch [gamepath patchpath]
   (shutil.copy2 gamepath (+ gamepath ".bak"))
