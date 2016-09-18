@@ -56,8 +56,8 @@ To use REternal Daughter, copy its files to your Eternal Daughter
 directory and run reternal.py. If you don't have the game, it can be
 freely downloaded from [here](http://www.derekyu.com/games.html).
 
-    usage: reternal.py [-h] [-i INPUT] [-u] [-b] [--noborders] [-p PATCHFILE] [-n]
-                       [-r]
+    usage: reternal.py [-h] [-i INPUT] [-u] [-b] [-N] [-p PATCHFILE] [-n] [-r]
+                       [-c]
     
     Unofficial Eternal Daughter patch. Default settings work if placed in the
     game's folder.
@@ -69,14 +69,15 @@ freely downloaded from [here](http://www.derekyu.com/games.html).
       -u, --upscale         Upscale the game (experimental)
       -b, --borders         High resolution with screen borders (experimental;
                             overrides -u)
-      --noborders           Just force higher resolution (overrides -u and -b)
+      -N, --noborders       Just force higher resolution (overrides -u and -b)
       -p PATCHFILE, --patchfile PATCHFILE
                             Custom patchfile in BSDiff format (overrides -u, -b
-                            and --noborders)
+                            and -N)
       -n, --nofix           Don't fix the game, just run it (overrides -u, -b,
                             --noborders and -p)
       -r, --replace         Permanently replace input file with a patched version
                             (overrides -n)
+      -c, --cncs232         Fix Cncs232.dll (you should only run this once)
     
     Without other arguments, the game will be started in windowed mode.
       

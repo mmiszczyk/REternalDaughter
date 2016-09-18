@@ -64,8 +64,9 @@ ______    /                          /)
                       :help "Upscale the game (experimental)")
 (.add_argument parser "-b" "--borders" :action "store_true"
                       :help "High resolution with screen borders (experimental; overrides -u)")
-(.add_argument parser "--noborders" :action "store_true" :help "Just force higher resolution (overrides -u and -b)")
-(.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u, -b and --noborders)")
+(.add_argument parser "-N" "--noborders" :action "store_true"
+                      :help "Just force higher resolution (overrides -u and -b)")
+(.add_argument parser "-p" "--patchfile" :help "Custom patchfile in BSDiff format (overrides -u, -b and -N)")
 (.add_argument parser "-n" "--nofix" :action "store_true"
                       :help "Don't fix the game, just run it (overrides -u, -b, --noborders and -p)")
 (.add_argument parser "-r" "--replace" :action "store_true"
