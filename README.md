@@ -142,14 +142,14 @@ MIDI/sound effects code).
 Unfortunately, Eternal Daughter.exe also contains all the game data as
 there are no files containing sprites or sounds anywhere in the game
 folder. Even worse: all that data seems to be in custom formats as
-Resource Hacker is unable to extract any images or music. Even strings
+Resource Hacker or [Resource Cracker](https://www.pelock.com/products/resource-cracker) is unable to extract any images or music. Even strings
 table doesn't contain the in-game text, just standard diagnostic
 messages. Opening Cncs232.dll with it is similarly fruitless: it has
 a few bitmaps but nothing similar to game content.
 
-![Eternal Daughter.exe in Resource Hacker](images/reshack.png)
+![Eternal Daughter.exe in Resource Hacker](images/reshack.png) or [Resource Cracker](https://www.pelock.com/products/resource-cracker)
 
-![Cncs232.dll in Resource Hacker](images/reshack2.png)
+![Cncs232.dll in Resource Hacker](images/reshack2.png) or [Resource Cracker](https://www.pelock.com/products/resource-cracker)
 
 As quick google search doesn't show any way of extracting data from
 compiled Multimedia Fusion games, the only thing left is disassembling
